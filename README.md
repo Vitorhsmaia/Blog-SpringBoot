@@ -42,7 +42,7 @@ Exibe os resultados encontrados com título, autor, data e conteúdo.
 
 🛠️ Tecnologias Utilizadas
 
-Java 17+
+Java 21
 
 Spring Boot 3 (Spring MVC, Spring Data JPA, Validation)
 
@@ -59,8 +59,5 @@ Lista: http://localhost:8080/posts
 Buscar: http://localhost:8080/search
 
 H2 Console: http://localhost:8080/h2-console (URL JDBC: jdbc:h2:mem:blogdb)
-
-
-HTML5 / CSS3 / JavaScript
 
 Maven (gerenciador de dependências)
