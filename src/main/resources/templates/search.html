@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Buscar Publicações</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+  <div class="container">
+    <h1>Buscar publicação</h1>
+
+    <form th:action="@{/search}" method="post" id="searchForm">
+      <label for="title">Buscar por título</label>
+      <input type="text" id="title" name="title">
+
+      <label for="author">Buscar por autor</label>
+      <input type="text" id="author" name="author">
+      <button type="button" id="authors-btn-search">Autores▼</button>
+      <div id="authors-list-search" style="display:none;">
+        <ul>
+         <li th:each="a : ${authors}">
+           <a href="#" th:text="${a}" th:attr="data-author=${a}"></a>
+         </li>
+        </ul>
+      </div>
+
+      <label for="date">Buscar por data</label>
+      <input type="date" id="date" name="date">
+
+      <div class="buttons">
+        <button type="submit">BUSCAR</button>
+        <a class="btn" th:href="@{/posts}">VOLTAR</a>
+      </div>
+    </form>
+
+    <div class="results" th:if="${results != null}">
+      <h2>Resultados</h2>
+      <ul>
+        <li th:each="r : ${results}">
+          <strong th:text="${r.title}"></strong> — <span th:text="${r.author}"></span> (<span th:text="${r.publishDate}"></span>)
+          <p th:text="${r.content}"></p>
+        </li>
+      </ul>
+      <div th:if="${#lists.isEmpty(results)}">Nenhum resultado encontrado.</div>
+    </div>
+  </div>
+
+  <script th:src="@{/js/search.js}"></script>
+</body>
+</html>

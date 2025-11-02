@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastrar Post</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+  <div class="container">
+    <h1>Cadastrar publicação</h1>
+
+    <!-- form envia para /save -->
+    <form id="postForm" th:action="@{/save}" th:object="${post}" method="post" novalidate>
+      <label for="title">Título</label>
+      <input type="text" id="title" name="title" th:field="*{title}">
+      <span class="error" id="error-title" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+
+      <label for="content">Texto</label>
+      <textarea id="content" name="content" th:field="*{content}"></textarea>
+      <span class="error" id="error-content" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></span>
+
+      <label for="publishDate">Data de publicação</label>
+      <input type="date" id="publishDate" name="publishDate" th:field="*{publishDate}">
+
+      <label for="author">Autor</label>
+      <input type="text" id="author" name="author" th:field="*{author}">
+      <button type="button" id="authors-btn">Autores▼</button>
+      <div id="authors-list" class="dropdown" style="display:none;">
+        <ul>
+          <li th:each="a : ${authors}">
+            <a href="#" th:text="${a}" onclick="selectAuthor(event, '[[${a}]]')">Autor</a>
+          </li>
+        </ul>
+      </div>
+      <span class="error" id="error-author" th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></span>
+
+      <div class="buttons">
+        <button type="submit" id="saveBtn">SALVAR</button>
+        <a class="btn" th:href="@{/posts}">LISTA</a>
+      </div>
+    </form>
+  </div>
+
+  <script th:src="@{/js/form-validation.js}"></script>
+  <script th:src="@{/js/search.js}"></script>
+</body>
+</html>
